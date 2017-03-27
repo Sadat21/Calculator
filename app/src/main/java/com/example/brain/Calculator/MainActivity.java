@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.brain.Calculator.databinding.ActivityMainBinding;
 
+// TODO: Add Android app icon
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9;
     private Button opClear, opDivide, opMulti, opSub, opAdd, opEqual;
