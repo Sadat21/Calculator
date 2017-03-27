@@ -1,13 +1,12 @@
-package com.example.brain.myapplication;
+package com.example.brain.Calculator;
 
-import android.database.DatabaseUtils;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.brain.myapplication.databinding.ActivityMainBinding;
+import com.example.brain.Calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9;

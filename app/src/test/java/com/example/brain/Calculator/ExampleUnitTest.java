@@ -1,4 +1,4 @@
-package com.example.brain.myapplication;
+package com.example.brain.Calculator;
 
 import org.junit.Test;
 
