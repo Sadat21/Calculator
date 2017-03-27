@@ -19,34 +19,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initialize();
     }
 
     private void initialize()
     {
-        /*
-        num0 = (Button)findViewById(R.id.num0);
-        num1 = (Button)findViewById(R.id.num1);
-        num2 = (Button)findViewById(R.id.num2);
-        num3 = (Button)findViewById(R.id.num3);
-        num4 = (Button)findViewById(R.id.num4);
-        num5 = (Button)findViewById(R.id.num5);
-        num6 = (Button)findViewById(R.id.num6);
-        num7 = (Button)findViewById(R.id.num7);
-        num8 = (Button)findViewById(R.id.num8);
-        num9 = (Button)findViewById(R.id.num9);
-
-        opClear = (Button)findViewById(R.id.opClear);
-        opDivide = (Button)findViewById(R.id.opDivide);
-        opMulti = (Button)findViewById(R.id.opMulti);
-        opSub = (Button)findViewById(R.id.opSub);
-        opAdd = (Button)findViewById(R.id.opAdd);
-        opEqual = (Button)findViewById(R.id.opEqual);
-        Display = (TextView)findViewById(R.id.Display);
-        */
-
         binding.num0.setOnClickListener(this);
         binding.num1.setOnClickListener(this);
         binding.num2.setOnClickListener(this);
@@ -67,15 +45,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.Display.setOnClickListener(this);
     }
 
-    // TODO: Sadat do this part
+    // TODO: Sadat fill in the rest of this part
     public void onClick(View view)
     {
-        // If the button clicked on is 0, then add the string "0" to the display
+        // If the 0 button is clicked, on then add the string "0" to the display
         if (view.getId() == binding.num0.getId())
         {
             binding.Display.setText(binding.Display.getText() + "0");
         }
 
+        // If the C button is clicked on, then set the display to an empty string
         if (view.getId() == binding.opClear.getId())
         {
             binding.Display.setText("");
