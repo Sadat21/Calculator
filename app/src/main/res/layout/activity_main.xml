@@ -35,7 +35,7 @@
                 android:background="@android:color/holo_red_light"
                 android:gravity="center|fill"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/background_light"
                 android:textSize="30sp" />
 
             <TextView
@@ -373,7 +373,7 @@
                 android:layout_weight="1.00"
                 android:background="@android:color/holo_blue_bright"
                 android:gravity="center"
-                android:text="*"
+                android:text="x"
                 android:textColor="@android:color/background_light"
                 android:textSize="30sp"
                 android:typeface="normal"
