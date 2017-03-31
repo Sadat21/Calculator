@@ -3,16 +3,19 @@ package com.example.brain.Calculator;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.brain.Calculator.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
+
 // TODO: Add Android app icon
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, point;
     private Button opClear, opDivide, opMulti, opSub, opAdd, opEqual;
-    private TextView Display;
+    private TextView Display, Work;
     private TextView Intermediate;
     private ActivityMainBinding binding;
 
@@ -20,19 +23,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Value stored to be displayed
      */
     private double value1 = Double.NaN;
-    private double value2;
-    private boolean add = false;
-    private boolean sub = false;
-    private boolean mul = false;
-    private boolean div = false;
+    private double value2 = Double.NaN;
+
+
     private boolean textSet = false;
+    private boolean negative = false;
+    boolean equal = true;
 
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
     private static final char MULTIPLICATION = '*';
     private static final char DIVISION = '/';
 
+    private static String negativeTemp;
+
     private char CURRENT_ACTION;
+    DecimalFormat decimalFormat = new DecimalFormat("#.#######");
 
 
 
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.num8.setOnClickListener(this);
         binding.num9.setOnClickListener(this);
         binding.Decimal.setOnClickListener(this);
+        binding.PlusMinus.setOnClickListener(this);
 
         binding.opClear.setOnClickListener(this);
         binding.opDivide.setOnClickListener(this);
@@ -142,6 +149,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             binding.Display.setText(binding.Display.getText() + ".");
         }
+        if (view.getId() == binding.PlusMinus.getId())
+        {
+
+            checkTextSet();
+            if(binding.Display.getText() == null || binding.Display.getText() == ""){
+                return;
+            }
+            else if(!negative){
+                negativeTemp = binding.Display.getText().toString();
+                binding.Display.setText( "-" + binding.Display.getText());
+                negative = true;
+
+            }
+            else {
+                binding.Display.setText(negativeTemp);
+                negative = false;
+            }
+
+
+        }
 
 
 
@@ -160,10 +187,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //
         else if (view.getId() == binding.opAdd.getId())
         {
-            calc();
+            if(!calc()){
+                return;
+            }
             CURRENT_ACTION = ADDITION;
-            //binding.Intermediate.setText(value1 + "+");
-            binding.Display.setText("+");
+            binding.Work.setText(decimalFormat.format(value1) + " + ");
+            //binding.Display.setText("+");
             textSet = true;
 
 
@@ -172,71 +201,111 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view.getId() == binding.opSub.getId())
         {
 
-            calc();
+            if(!calc()){
+                return;
+            }
             CURRENT_ACTION = SUBTRACTION;
-            //binding.Intermediate.setText(value1 + "-");
-            binding.Display.setText("-");
+            binding.Work.setText(decimalFormat.format(value1) + " - ");
+            //binding.Display.setText("-");
             textSet = true;
         }
         //
         else if (view.getId() == binding.opMulti.getId())
         {
-            calc();
+            if(!calc()){
+                return;
+            }
             CURRENT_ACTION = MULTIPLICATION;
-            //binding.Intermediate.setText(value1 + "x");
-            binding.Display.setText("x");
+            binding.Work.setText(decimalFormat.format(value1) + " x ");
+            //binding.Display.setText("x");
             textSet = true;
         }
         //
         else if (view.getId() == binding.opDivide.getId())
         {
-            calc();
+            if(!calc()){
+                return;
+            }
             CURRENT_ACTION = DIVISION;
-            //binding.Intermediate.setText(value1 + "/");
-            binding.Display.setText("/");
+            binding.Work.setText(decimalFormat.format(value1) + " / ");
+            //binding.Display.setText("/");
             textSet = true;
         }
         //
         else if (view.getId() == binding.opEqual.getId())
         {
-            calc();
-            binding.Display.setText(Double.toString(value1) );
-            value1 = Double.NaN;
-            textSet = true;
+            if(!equal && !(Double.isNaN(value1))) {
+                if(!calc()){
+                    return;
+                }
+                String temp = binding.Work.getText().toString();
+                binding.Work.setText(null);
+                binding.Work.setText(temp + decimalFormat.format(value2) + " = " + decimalFormat.format(value1));
+                String blah = Double.toString(value1);
+                if(blah.length() > 9) {
+                    binding.Display.setText(String.format("%1.4Ef", value1));
+                }
+                else{
+                    binding.Display.setText(blah);
+                }
+
+                value1 = Double.NaN;
+                value2 = Double.NaN;
+                textSet = true;
+                equal = true;
+            }
         }
     }
 
 
     private void checkTextSet(){
+        equal = false;
         if(textSet){
             binding.Display.setText(null);
             textSet = false;
         }
     }
 
-    public void calc(){
+    public boolean calc(){
+        negative = false;
+        equal = false;
         if (Double.isNaN(value1)) {
-            value1 = Double.parseDouble(binding.Display.getText().toString());
-
-        } else {
-            value2 = Double.parseDouble(binding.Display.getText().toString());
-            binding.Display.setText(null);
-
-            if(CURRENT_ACTION == ADDITION) {
-                value1 += value2;
+            try {
+                value1 = Double.parseDouble(binding.Display.getText().toString());
+                binding.Display.setText(null);
             }
-            else if(CURRENT_ACTION == SUBTRACTION) {
-                value1 -= value2;
+            catch (Exception e){
+                e.printStackTrace();
+                return false;
             }
-            else if(CURRENT_ACTION == MULTIPLICATION) {
-                value1 *= value2;
-            }
-            else if(CURRENT_ACTION == DIVISION) {
-                value1 /= value2;
-            }
-
 
         }
+        else {
+            try {
+                value2 = Double.parseDouble(binding.Display.getText().toString());
+
+                binding.Display.setText(null);
+
+                if(CURRENT_ACTION == ADDITION) {
+                    value1 += value2;
+                }
+                else if(CURRENT_ACTION == SUBTRACTION) {
+                    value1 -= value2;
+                }
+                else if(CURRENT_ACTION == MULTIPLICATION) {
+                    value1 *= value2;
+                }
+                else if(CURRENT_ACTION == DIVISION) {
+                    value1 /= value2;
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+        return true;
     }
 
 }
