@@ -77,69 +77,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.Display.setText(null);
     }
 
-    // TODO: Sadat fill in the rest of this part
     public void onClick(View view)
     {
-        // If the 0 button is clicked, on then add the string "0" to the display
+        // If the 0 button is clicked on then add the string "0" to the display
         if (view.getId() == binding.num0.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "0");
         }
-        // If the 1 button is clicked, on then add the string "0" to the display
+        // If the 1 button is clicked on then add the string "1" to the display
         if (view.getId() == binding.num1.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "1");
         }
-        // If the 2 button is clicked, on then add the string "0" to the display
+        // If the 2 button is clicked on then add the string "2" to the display
         if (view.getId() == binding.num2.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "2");
         }
-        // If the 3 button is clicked, on then add the string "0" to the display
+        // If the 3 button is clicked on then add the string "3" to the display
         if (view.getId() == binding.num3.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "3");
         }
-        // If the 4 button is clicked, on then add the string "0" to the display
+        // If the 4 button is clicked on then add the string "4" to the display
         if (view.getId() == binding.num4.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "4");
         }
-        // If the 5 button is clicked, on then add the string "0" to the display
+        // If the 5 button is clicked on then add the string "5" to the display
         if (view.getId() == binding.num5.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "5");
         }
-        // If the 6 button is clicked, on then add the string "0" to the display
+        // If the 6 button is clicked on then add the string "6" to the display
         if (view.getId() == binding.num6.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "6");
         }
-        // If the 7 button is clicked, on then add the string "0" to the display
+        // If the 7 button is clicked on then add the string "7" to the display
         if (view.getId() == binding.num7.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "7");
         }
-        // If the 8 button is clicked, on then add the string "0" to the display
+        // If the 8 button is clicked on then add the string "8" to the display
         if (view.getId() == binding.num8.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "8");
         }
-        // If the 9 button is clicked, on then add the string "0" to the display
+        // If the 9 button is clicked on then add the string "9" to the display
         if (view.getId() == binding.num9.getId())
         {
             checkTextSet();
             binding.Display.setText(binding.Display.getText() + "9");
         }
+        // If the decimal button is clicked on then add the string "." to this display
         if (view.getId() == binding.Decimal.getId())
         {
             checkTextSet();
@@ -171,12 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
-
-
-
         // If the C button is clicked on, then set the display to an empty string
         else if (view.getId() == binding.opClear.getId())
         {
@@ -191,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             CURRENT_ACTION = ADDITION;
             binding.Work.setText(decimalFormat.format(value1) + " + ");
-            //binding.Display.setText("+");
             textSet = true;
 
 
@@ -205,7 +198,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             CURRENT_ACTION = SUBTRACTION;
             binding.Work.setText(decimalFormat.format(value1) + " - ");
-            //binding.Display.setText("-");
             textSet = true;
         }
         //
@@ -216,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             CURRENT_ACTION = MULTIPLICATION;
             binding.Work.setText(decimalFormat.format(value1) + " x ");
-            //binding.Display.setText("x");
             textSet = true;
         }
         //
@@ -227,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             CURRENT_ACTION = DIVISION;
             binding.Work.setText(decimalFormat.format(value1) + " / ");
-            //binding.Display.setText("/");
             textSet = true;
         }
         //
@@ -282,7 +272,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else {
             try {
                 value2 = Double.parseDouble(binding.Display.getText().toString());
-
                 binding.Display.setText(null);
 
                 if(CURRENT_ACTION == ADDITION) {
