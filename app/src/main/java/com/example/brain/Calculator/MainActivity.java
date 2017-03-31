@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.brain.Calculator.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
+
 // TODO: Add Android app icon
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, point;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static String negativeTemp;
 
     private char CURRENT_ACTION;
+    DecimalFormat decimalFormat = new DecimalFormat("#.#######");
 
 
 
@@ -188,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             CURRENT_ACTION = ADDITION;
-            binding.Work.setText(value1 + " + ");
+            binding.Work.setText(decimalFormat.format(value1) + " + ");
             //binding.Display.setText("+");
             textSet = true;
 
@@ -202,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             CURRENT_ACTION = SUBTRACTION;
-            binding.Work.setText(value1 + " - ");
+            binding.Work.setText(decimalFormat.format(value1) + " - ");
             //binding.Display.setText("-");
             textSet = true;
         }
@@ -213,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             CURRENT_ACTION = MULTIPLICATION;
-            binding.Work.setText(value1 + " x ");
+            binding.Work.setText(decimalFormat.format(value1) + " x ");
             //binding.Display.setText("x");
             textSet = true;
         }
@@ -224,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
             CURRENT_ACTION = DIVISION;
-            binding.Work.setText(value1 + " / ");
+            binding.Work.setText(decimalFormat.format(value1) + " / ");
             //binding.Display.setText("/");
             textSet = true;
         }
@@ -237,8 +240,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 String temp = binding.Work.getText().toString();
                 binding.Work.setText(null);
-                binding.Work.setText(temp + value2 + " = " + value1);
-                binding.Display.setText(Double.toString(value1));
+                binding.Work.setText(temp + decimalFormat.format(value2) + " = " + decimalFormat.format(value1));
+                String blah = Double.toString(value1);
+                if(blah.length() > 9) {
+                    binding.Display.setText(String.format("%1.4Ef", value1));
+                }
+                else{
+                    binding.Display.setText(blah);
+                }
+
                 value1 = Double.NaN;
                 value2 = Double.NaN;
                 textSet = true;
