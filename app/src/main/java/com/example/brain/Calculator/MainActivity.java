@@ -150,23 +150,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (view.getId() == binding.PlusMinus.getId())
         {
-
             checkTextSet();
             if(binding.Display.getText() == null || binding.Display.getText() == ""){
+                return;
+            }
+            else if (binding.Display.getText().equals("0")) {
                 return;
             }
             else if(!negative){
                 negativeTemp = binding.Display.getText().toString();
                 binding.Display.setText( "-" + binding.Display.getText());
                 negative = true;
-
             }
             else {
                 binding.Display.setText(negativeTemp);
                 negative = false;
             }
-
-
         }
 
 
@@ -177,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             value1 = Double.NaN;
             binding.Display.setText(null);
         }
-        //
         else if (view.getId() == binding.opAdd.getId())
         {
             if(!calc()){
@@ -186,10 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             CURRENT_ACTION = ADDITION;
             binding.Work.setText(decimalFormat.format(value1) + " + ");
             textSet = true;
-
-
         }
-        //
         else if (view.getId() == binding.opSub.getId())
         {
 
@@ -200,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             binding.Work.setText(decimalFormat.format(value1) + " - ");
             textSet = true;
         }
-        //
         else if (view.getId() == binding.opMulti.getId())
         {
             if(!calc()){
@@ -210,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             binding.Work.setText(decimalFormat.format(value1) + " x ");
             textSet = true;
         }
-        //
         else if (view.getId() == binding.opDivide.getId())
         {
             if(!calc()){
@@ -220,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             binding.Work.setText(decimalFormat.format(value1) + " / ");
             textSet = true;
         }
-        //
         else if (view.getId() == binding.opEqual.getId())
         {
             if(!equal && !(Double.isNaN(value1))) {
@@ -291,9 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
                 return false;
             }
-
         }
         return true;
     }
-
 }
