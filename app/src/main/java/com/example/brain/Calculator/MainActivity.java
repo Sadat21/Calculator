@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(binding.Display.getText() == null || binding.Display.getText() == ""){
                 return;
             }
-            else if (binding.Display.getText().equals("0")) {
+            else if (binding.Display.getText().equals("0") || binding.Display.getText().equals("0.0")) {
                 return;
             }
             else if(!negative){
