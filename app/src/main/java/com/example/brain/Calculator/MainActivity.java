@@ -1,5 +1,11 @@
 package com.example.brain.Calculator;
 
+/**
+ * Authors: Brian Pho, Sadat Islam, Harjee Johal
+ * Date: March 31, 2017
+ * Version: 1.0
+ */
+
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +17,8 @@ import com.example.brain.Calculator.databinding.ActivityMainBinding;
 
 import java.text.DecimalFormat;
 
-// TODO: Add Android app icon
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, point;
-    private Button opClear, opDivide, opMulti, opSub, opAdd, opEqual;
-    private TextView Display, Work;
-    private TextView Intermediate;
+
     private ActivityMainBinding binding;
 
     /**
@@ -39,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private char CURRENT_ACTION;
     DecimalFormat decimalFormat = new DecimalFormat("#.#######");
-
-
-
 
 
 
