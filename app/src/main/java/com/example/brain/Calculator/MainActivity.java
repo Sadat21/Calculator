@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean textSet = false;
     private boolean negative = false;
     boolean equal = true;
+    boolean decimal = false;
+
 
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
@@ -146,7 +148,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(binding.Display.getText() == null || binding.Display.getText() == "" ){
                 binding.Display.setText("0");
             }
-            binding.Display.setText(binding.Display.getText() + ".");
+            if (!decimal) {
+                binding.Display.setText(binding.Display.getText() + ".");
+                decimal = true;
+            }
         }
         if (view.getId() == binding.PlusMinus.getId())
         {
@@ -219,21 +224,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!calc()){
                     return;
                 }
-                String temp = binding.Work.getText().toString();
-                binding.Work.setText(null);
-                binding.Work.setText(temp + decimalFormat.format(value2) + " = " + decimalFormat.format(value1));
-                String blah = Double.toString(value1);
-                if(blah.length() > 9) {
-                    binding.Display.setText(String.format("%1.4Ef", value1));
+                if (value1 == Double.POSITIVE_INFINITY || value1 == Double.NaN)
+                {
+                    binding.Display.setText(String.format("Undefined"));
+                    String temp = binding.Work.getText().toString();
+                    binding.Work.setText(null);
+                    binding.Work.setText(temp + decimalFormat.format(value2) + " = " + "Undefined");
                 }
-                else{
-                    binding.Display.setText(blah);
+                else if (value1 == -0)
+                {
+                    binding.Display.setText(String.format("0.0"));
+                    String temp = binding.Work.getText().toString();
+                    binding.Work.setText(null);
+                    binding.Work.setText(temp + decimalFormat.format(value2) + " = " + "0.0");
                 }
+                else {
+                    String temp = binding.Work.getText().toString();
+                    binding.Work.setText(null);
+                    binding.Work.setText(temp + decimalFormat.format(value2) + " = " + decimalFormat.format(value1));
+                    String blah = Double.toString(value1);
 
+                    if (blah.length() > 9) {
+                        binding.Display.setText(String.format("%1.4Ef", value1));
+                    } else {
+                        binding.Display.setText(blah);
+                    }
+                }
                 value1 = Double.NaN;
                 value2 = Double.NaN;
                 textSet = true;
                 equal = true;
+                decimal = false;
             }
         }
     }
@@ -248,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public boolean calc(){
+        decimal = false;
         negative = false;
         equal = false;
         if (Double.isNaN(value1)) {
