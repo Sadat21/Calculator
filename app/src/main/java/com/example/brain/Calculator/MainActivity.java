@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean decimal = false;
 
 
+
     private static final char ADDITION = '+';
     private static final char SUBTRACTION = '-';
     private static final char MULTIPLICATION = '*';
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view.getId() == binding.opAdd.getId())
         {
             if(!calc()){
-                return;
+                //return;
             }
             CURRENT_ACTION = ADDITION;
             binding.Work.setText(decimalFormat.format(value1) + " + ");
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
 
             if(!calc()){
-                return;
+                //return;
             }
             CURRENT_ACTION = SUBTRACTION;
             binding.Work.setText(decimalFormat.format(value1) + " - ");
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view.getId() == binding.opMulti.getId())
         {
             if(!calc()){
-                return;
+                //return;
             }
             CURRENT_ACTION = MULTIPLICATION;
             binding.Work.setText(decimalFormat.format(value1) + " x ");
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view.getId() == binding.opDivide.getId())
         {
             if(!calc()){
-                return;
+                //return;
             }
             CURRENT_ACTION = DIVISION;
             binding.Work.setText(decimalFormat.format(value1) + " / ");
@@ -224,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!calc()){
                     return;
                 }
-                if (value1 == Double.POSITIVE_INFINITY || value1 == Double.NaN)
+                if (value1 == Double.POSITIVE_INFINITY || value1 == Double.NEGATIVE_INFINITY || value1 == Double.NaN)
                 {
                     binding.Display.setText(String.format("Undefined"));
                     String temp = binding.Work.getText().toString();
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String blah = Double.toString(value1);
 
                     if (blah.length() > 9) {
-                        binding.Display.setText(String.format("%1.4Ef", value1));
+                        binding.Display.setText(String.format("%1.3Ef", value1));
                     } else {
                         binding.Display.setText(blah);
                     }
